@@ -47,14 +47,44 @@ const validateCred = function(creditArray) {
     }
     return sum%10===0;
 }
-// console.log(validateCred(invalid5));
+//console.log(validateCred(mystery5));
 
-const findInvalidCards = function(nastedCreditCard){
-  
+//save arrays which has invalid number set.
+const findInvalidCards = function(nestedCreditCard){
+  let invalidNum = [];
+  for(let i=0; i< nestedCreditCard.length; i++){
+    if(!validateCred(nestedCreditCard[i])){
+      invalidNum.push(nestedCreditCard[i]);
+    }
+  }
+  return invalidNum;
 }
-
-
-
+/*check which company's card is invalid*/
+const idInvalidCardCompanies = function(invalidNum){
+  let companies = [];
+  for(let i=0;i<invalidNum.length;i++){
+    switch(invalidNum[i][0]){
+      case 3:
+        companies.push('Amex (American Express)');
+        break;
+      case 4:
+        companies.push('Visa');
+        break;
+      case 5:
+        companies.push('Mastercard');
+        break;
+      case 6:
+        companies.push('Discover');
+        break;
+      default:
+        console.log(invalidNum[i] + 'Company not found');
+        break;
+    }
+  }
+  return companies;
+}
+//checks the number of Invalid cards and company of that.
+console.log(idInvalidCardCompanies(findInvalidCards(batch)));
 
 
 
